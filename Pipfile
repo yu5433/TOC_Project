@@ -4,23 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-certifi = "==2019.9.11"
-chardet = "==3.0.4"
-click = "==7.0"
-flask = "==1.0.2"
-future = "==0.18.1"
-idna = "==2.8"
-itsdangerous = "==1.1.0"
-jinja2 = "==2.10.3"
-line-bot-sdk = "==1.14.0"
-pygraphviz = {path = "./pygraphviz-1.6-cp37-cp37m-win_amd64.whl"}
-python-dotenv = "==0.10.3"
-requests = "==2.22.0"
-six = "==1.12.0"
-transitions = "==0.6.9"
-urllib3 = "==1.25.6"
-MarkupSafe = "==1.1.1"
-Werkzeug = "==0.16.0"
+flask = "*"
+python-dotenv = "*"
+line-bot-sdk = "*"
+transitions = "*"
 
 [dev-packages]
 
