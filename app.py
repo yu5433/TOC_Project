@@ -14,7 +14,7 @@ load_dotenv()
 
 #build a construction of state
 machine = TocMachine(
-    states=["user", "newest_page", "favorite_page"],
+    states=["user", "newest_page", "favorite_page", "experience_page"],
     transitions=[
         {
             "trigger": "advance",
@@ -27,6 +27,12 @@ machine = TocMachine(
             "source": "user",
             "dest": "favorite_page",
             "conditions": "is_going_to_favorite_page",
+        },
+        {
+            "trigger": "advance",
+            "source": "newest_page",
+            "dest": "experience_page",
+            "conditions": "is_going_to_experience_page",
         },
         {"trigger": "go_back", "source": ["newest_page", "favorite_page"], "dest": "user"},
     ],

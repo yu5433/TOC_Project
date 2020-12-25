@@ -12,16 +12,17 @@ class TocMachine(GraphMachine):
         return text.lower() == "new"
 
     def on_enter_newest_page(self, event):
-        replt_token = event.reply_token
-        send_text_message(replt_token, "請輸入欲搜尋分類")
+        reply_token = event.reply_token
+        send_text_message(reply_token, "請輸入欲搜尋分類")
     
     def is_going_to_favorite_page(self, event):
         text = event.state(self, event)
         return text.lower() == "favorite"
 
     def on_enter_newest_page(self, event):
-        replt_token = event.reply_token
-        send_text_message(replt_token, "請輸入欲查看文章")
+        reply_token = event.reply_token
+        send_text_message(reply_token, "請輸入欲查看文章")
+        self.go_back()
     
     
 
