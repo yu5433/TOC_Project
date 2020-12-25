@@ -12,23 +12,23 @@ from utils import send_text_message
 
 load_dotenv()
 
-
+#build a construction of state
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["user", "newest_page", "favorite_page"],
     transitions=[
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "state1",
+            "dest": "newest_page",
             "conditions": "is_going_to_state1",
         },
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "state2",
+            "dest": "favorite_page",
             "conditions": "is_going_to_state2",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {"trigger": "go_back", "source": ["newest_page", "favorite_page"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -51,7 +51,7 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 
-
+"""
 @app.route("/callback", methods=["POST"])
 def callback():
     signature = request.headers["X-Line-Signature"]
@@ -78,7 +78,7 @@ def callback():
 
     return "OK"
 
-
+"""
 @app.route("/webhook", methods=["POST"])
 def webhook_handler():
     signature = request.headers["X-Line-Signature"]
@@ -104,10 +104,10 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
-
+            if machine.state == 'user':
+                send_text_message(event.reply_token, "請重新輸入")
+            #send_text_message(event.reply_token, "Not Entering any State")
     return "OK"
-
 
 @app.route("/show-fsm", methods=["GET"])
 def show_fsm():
