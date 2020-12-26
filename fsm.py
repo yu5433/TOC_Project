@@ -34,6 +34,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text == "經驗"
     def on_going_to_experience_page(self, event):
+        send_text_message(event.reply_token, "trigger experience")
         url = "https://www.ptt.cc/bbs/marvel/index.html"
         dict.update(get_all_href(0, url))
         for page in range(1,3):

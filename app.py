@@ -109,13 +109,11 @@ def webhook_handler():
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
-        send_text_message(event.reply_token, machine.state)
         if response == False:
             if machine.state == 'user':
                 send_text_message(event.reply_token, "請重新輸入")
             elif machine.state != 'user' and event.message.text == "回到主畫面":
                 machine.go_back()
-                send_text_message(event.reply_token, machine.state)
             #send_text_message(event.reply_token, "Not Entering any State")
     return "OK"
 
