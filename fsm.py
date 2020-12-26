@@ -13,6 +13,7 @@ class TocMachine(GraphMachine):
 
     def on_enter_newest_page(self, event):
         send_text_message(event.reply_token, "請輸入欲搜尋分類")
+        self.go_back()
     
     def is_going_to_favorite_page(self, event):
         text = event.state(self, event)
@@ -21,7 +22,7 @@ class TocMachine(GraphMachine):
     def on_enter_newest_page(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "請輸入欲查看文章")
-    
+        self.go_back()
     
 
 """
