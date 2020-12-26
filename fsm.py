@@ -8,7 +8,7 @@ class TocMachine(GraphMachine):
         self.machine = GraphMachine(model=self, **machine_configs)
     
     def is_going_to_newest_page(self, event):
-        text = event.state(self, event)
+        text = event.message.text
         return text == "新文章"
 
     def on_enter_newest_page(self, event):
@@ -16,7 +16,7 @@ class TocMachine(GraphMachine):
         self.go_back()
     
     def is_going_to_favorite_page(self, event):
-        text = event.state(self, event)
+        text = event.message.text
         return text == "精選文章"
 
     def on_enter_newest_page(self, event):
