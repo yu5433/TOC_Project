@@ -49,7 +49,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text == "精選文章"
 
-    def on_enter_newest_page(self, event):
+    def on_enter_favorite_page(self, event):
         send_text_message(event.reply_token, "請輸入欲查看文章")
     
 
