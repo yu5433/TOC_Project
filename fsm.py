@@ -27,12 +27,12 @@ class TocMachine(GraphMachine):
         return text == "新文章"
 
     def on_enter_newest_page(self, event):
-        text = "使用者欲觀看文章分類\n請輸入[經驗]、[創作]、[翻譯]"
+        text = "使用者欲觀看文章分類\n請輸入\"經驗\"、\"創作\"、\"翻譯\""
         send_text_message(event.reply_token, text) 
 
     def is_going_to_experience_page(self, event):
         text = event.message.text
-        return text == "[經驗]"
+        return text == "經驗"
     def on_going_to_experience_page(self, event):
         url = "https://www.ptt.cc/bbs/marvel/index.html"
         dict.update(get_all_href(0, url))
@@ -44,7 +44,8 @@ class TocMachine(GraphMachine):
             next_page_url = 'https://www.ptt.cc' + up_page_href
             url = next_page_url
             dict.update(get_all_href(0, url = url))
-        send_text_message(event.reply_token, "爬蟲測試") 
+        send_text_message(event.reply_token, dict) 
+
     def is_going_to_favorite_page(self, event):
         text = event.message.text
         return text == "精選文章"
