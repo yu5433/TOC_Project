@@ -1,7 +1,6 @@
 from transitions.extensions import GraphMachine
 from bs4 import BeautifulSoup
 from utils import send_text_message
-
 import requests
 
 def get_all_href(num, url):
@@ -34,15 +33,16 @@ class TocMachine(GraphMachine):
         return text == "經驗"
     def on_enter_experience_page(self, event):
         url = "https://www.ptt.cc/bbs/marvel/index.html"
-        content = get_all_href(url)
-        for page in range(1,3):
-            r = requests.get(url)
-            soup = BeautifulSoup(r.text,"html.parser")
-            btn = soup.select('div.btn-group > a')
-            up_page_href = btn[3]['href']
-            next_page_url = 'https://www.ptt.cc' + up_page_href
-            url = next_page_url
-            content = get_all_href(url = url)
+        content = "以下為搜尋到的內容："
+        # content += get_all_href(url)
+        # for page in range(1,3):
+        #     r = requests.get(url)
+        #     soup = BeautifulSoup(r.text,"html.parser")
+        #     btn = soup.select('div.btn-group > a')
+        #     up_page_href = btn[3]['href']
+        #     next_page_url = 'https://www.ptt.cc' + up_page_href
+        #     url = next_page_url
+        #     content += get_all_href(url = url)
         send_text_message(event.reply_token, content) 
 
     def is_going_to_favorite_page(self, event):
