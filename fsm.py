@@ -4,24 +4,23 @@ from utils import send_text_message
 
 import requests
 
-
-
+def get_all_href(num, url):
+    content = ""
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, "html.parser")
+    results = soup.select("div.title")
+    for item in results:
+        a_item = item.select_one("a")
+        title = item.text
+        if a_item:
+            if '經驗' in title:
+                content = title + "https://www.ptt.cc"+ a_item.get('href')
+    return content
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
-    def get_all_href(num, url):
-        content = ""
-        r = requests.get(url)
-        soup = BeautifulSoup(r.text, "html.parser")
-        results = soup.select("div.title")
-        for item in results:
-            a_item = item.select_one("a")
-            title = item.text
-            if a_item:
-                if '經驗' in title and num == 0:
-                    content = title + "https://www.ptt.cc"+ a_item.get('href')
-        return content
+
     def is_going_to_newest_page(self, event):
         text = event.message.text
         return text == "新文章"
@@ -36,7 +35,7 @@ class TocMachine(GraphMachine):
     def on_enter_experience_page(self, event):
         #send_text_message(event.reply_token, "trigger experience")
         url = "https://www.ptt.cc/bbs/marvel/index.html"
-        content = get_all_href(0, url)
+        content = get_all_href(url)
         for page in range(1,3):
             r = requests.get(url)
             soup = BeautifulSoup(r.text,"html.parser")
@@ -44,7 +43,7 @@ class TocMachine(GraphMachine):
             up_page_href = btn[3]['href']
             next_page_url = 'https://www.ptt.cc' + up_page_href
             url = next_page_url
-            content = get_all_href(0, url = url)
+            content = get_all_href(url = url)
         send_text_message(event.reply_token, content) 
 
     def is_going_to_favorite_page(self, event):
