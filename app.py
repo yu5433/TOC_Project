@@ -8,7 +8,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from fsm import TocMachine
-from utils import send_text_message
+from utils import send_text_message, send_image_message
 
 load_dotenv()
 
@@ -42,7 +42,6 @@ machine = TocMachine(
 )
 
 app = Flask(__name__, static_url_path="")
-
 
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv("LINE_CHANNEL_SECRET", None)
@@ -110,6 +109,8 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
+            if event.message.text == "fsm":
+                send_image_message(event.reply_token, 'https://pttmarvelwow.herokuapp.com/show-fsm')
             if machine.state == 'user':
                 send_text_message(event.reply_token, "請重新輸入")
             elif machine.state != 'user' and event.message.text == "回到主畫面":
@@ -126,3 +127,4 @@ def show_fsm():
 if __name__ == "__main__":
     port = os.environ.get("PORT", 8000)
     app.run(host="0.0.0.0", port=port, debug=True)
+

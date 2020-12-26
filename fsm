@@ -1,0 +1,15 @@
+digraph "State Machine" {
+	graph [color=black directed=true fillcolor=white label="State Machine" rankdir=LR "strict"=false style=solid]
+	node [color=black fillcolor=white peripheries=1 shape=rectangle style="rounded, filled"]
+	edge [color=black]
+	user [label=user color=red fillcolor=darksalmon peripheries=2]
+	newest_page [label=newest_page]
+	favorite_page [label=favorite_page]
+	experience_page [label=experience_page]
+	user -> newest_page [label="advance [is_going_to_newest_page]"]
+	user -> favorite_page [label="advance [is_going_to_favorite_page]"]
+	newest_page -> experience_page [label="advance [is_going_to_experience_page]"]
+	newest_page -> user [label=go_back]
+	favorite_page -> user [label=go_back]
+	experience_page -> user [label=go_back]
+}

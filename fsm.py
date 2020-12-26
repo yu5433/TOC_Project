@@ -45,7 +45,10 @@ class TocMachine(GraphMachine):
             next_page_url = 'https://www.ptt.cc' + up_page_href
             url = next_page_url
             dict.update(get_all_href(0, url = url))
-        send_text_message(event.reply_token, "test") 
+        text=""
+        for key, value in dict.items():
+            text += key + value
+        send_text_message(event.reply_token, text) 
 
     def is_going_to_favorite_page(self, event):
         text = event.message.text
@@ -53,6 +56,7 @@ class TocMachine(GraphMachine):
 
     def on_enter_favorite_page(self, event):
         send_text_message(event.reply_token, "請輸入欲查看文章")
+        self.go_back()
     
 
 """
