@@ -45,7 +45,7 @@ class TocMachine(GraphMachine):
             next_page_url = 'https://www.ptt.cc' + up_page_href
             url = next_page_url
             dict.update(get_all_href(0, url = url))
-        send_text_message(event.reply_token, dict) 
+        send_text_message(event.reply_token, "test") 
 
     def is_going_to_favorite_page(self, event):
         text = event.message.text
