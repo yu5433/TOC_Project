@@ -17,7 +17,7 @@ class TocMachine(GraphMachine):
     
     def is_going_to_favorite_page(self, event):
         text = event.state(self, event)
-        return text.lower() == "精選文章"
+        return text == "精選文章"
 
     def on_enter_newest_page(self, event):
         reply_token = event.reply_token
