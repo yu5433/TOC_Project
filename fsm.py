@@ -33,19 +33,19 @@ class TocMachine(GraphMachine):
     def is_going_to_experience_page(self, event):
         text = event.message.text
         return text == "經驗"
-    def on_going_to_experience_page(self, event):
-        send_text_message(event.reply_token, "trigger experience")
-        # url = "https://www.ptt.cc/bbs/marvel/index.html"
-        # dict.update(get_all_href(0, url))
-        # for page in range(1,3):
-        #     r = requests.get(url)
-        #     soup = BeautifulSoup(r.text,"html.parser")
-        #     btn = soup.select('div.btn-group > a')
-        #     up_page_href = btn[3]['href']
-        #     next_page_url = 'https://www.ptt.cc' + up_page_href
-        #     url = next_page_url
-        #     dict.update(get_all_href(0, url = url))
-        # send_text_message(event.reply_token, dict) 
+    def on_enter_experience_page(self, event):
+        #send_text_message(event.reply_token, "trigger experience")
+        url = "https://www.ptt.cc/bbs/marvel/index.html"
+        dict.update(get_all_href(0, url))
+        for page in range(1,3):
+            r = requests.get(url)
+            soup = BeautifulSoup(r.text,"html.parser")
+            btn = soup.select('div.btn-group > a')
+            up_page_href = btn[3]['href']
+            next_page_url = 'https://www.ptt.cc' + up_page_href
+            url = next_page_url
+            dict.update(get_all_href(0, url = url))
+        send_text_message(event.reply_token, dict) 
 
     def is_going_to_favorite_page(self, event):
         text = event.message.text
