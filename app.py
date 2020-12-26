@@ -34,7 +34,7 @@ machine = TocMachine(
             "dest": "experience_page",
             "conditions": "is_going_to_experience_page",
         },
-        {"trigger": "go_back", "source": ["newest_page", "favorite_page"], "dest": "user"},
+        {"trigger": "go_back", "source": ["newest_page", "favorite_page", "experience_page"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
