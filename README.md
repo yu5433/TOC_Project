@@ -42,9 +42,11 @@
 ![](https://i.imgur.com/xOBa4SJ.jpg)
 ![](https://i.imgur.com/qOObbrr.jpg)
 ![](https://i.imgur.com/whZJrry.jpg)
-
-
-
+___
+### 參考資料
+https://teddybearfp.github.io/2018/11/07/Ptt%E7%88%AC%E8%9F%B2/
+https://ithelp.ithome.com.tw/articles/10204709
+https://github.com/aqwefghnm/LineChatBot
 
 
 
