@@ -14,7 +14,7 @@ load_dotenv()
 
 #build a construction of state
 machine = TocMachine(
-    states=["user", "newest_page", "favorite_page", "creation_page", "experience_page", "translation_page"],
+    states=["user", "newest_page", "classical_page", "hottest_page", "creation_page", "experience_page", "translation_page"],
     transitions=[
         {
             "trigger": "advance",
@@ -25,8 +25,14 @@ machine = TocMachine(
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "favorite_page",
-            "conditions": "is_going_to_favorite_page",
+            "dest": "hottest_page",
+            "conditions": "is_going_to_hottest_page",
+        },
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "classical_page",
+            "conditions": "is_going_to_classical_page",
         },
         {
             "trigger": "advance",
@@ -46,13 +52,12 @@ machine = TocMachine(
             "dest": "translation_page",
             "conditions": "is_going_to_translation_page",
         },
-        {"trigger": "go_back", "source": ["newest_page", "favorite_page", "experience_page", "creation_page", "translation_page"], "dest": "user"},
+        {"trigger": "go_back", "source": ["newest_page", "hottest_page", "classical_page", "experience_page", "creation_page", "translation_page"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
     show_conditions=True,
 )
-
 app = Flask(__name__, static_url_path="")
 
 # get channel_secret and channel_access_token from your environment variable
@@ -126,8 +131,11 @@ def webhook_handler():
         if response == False:
             if event.message.text == "fsm":
                 send_image_message(event.reply_token, 'https://pttmarvelwow.herokuapp.com/show-fsm')
-            if machine.state == 'user':
-                send_text_message(event.reply_token, "請重新輸入")
+            elif machine.state != 'user' and event.message.text == "回到主畫面":
+                send_text_message(event.reply_token, "輸入「新文章」查看近日新文章。\n輸入「熱門文章」查看近日爆文。\n輸入「經典文章」查看Marvel版精選好文。\n隨時輸入「回到主畫面」可以重頭開始。\n隨時輸入「fsm」可以查看狀態圖。")
+                machine.go_back()
+            elif machine.state == 'user':
+                send_text_message(event.reply_token, "輸入「新文章」查看近日新文章。\n輸入「熱門文章」查看近日爆文。\n輸入「經典文章」查看Marvel版精選好文。\n隨時輸入「回到主畫面」可以重頭開始。\n隨時輸入「fsm」可以查看狀態圖。")
             #send_text_message(event.reply_token, "Not Entering any State")
     
     return "OK"
