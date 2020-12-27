@@ -19,6 +19,10 @@
 * For crawling
     * BeautifulSoap4
     * requests
+## ChatBot資訊
+![](https://i.imgur.com/kwhpsij.png)
+* ChatBot Name：PttMarvelWOwww
+* BotBasic ID：@739uiuuj
 
 ## ChatBot 功能
 * PTT Marvel版依文章分類爬取最新文章
@@ -42,6 +46,8 @@
 ![](https://i.imgur.com/xOBa4SJ.jpg)
 ![](https://i.imgur.com/qOObbrr.jpg)
 ![](https://i.imgur.com/whZJrry.jpg)
+
+
 ___
 ### 參考資料
 https://teddybearfp.github.io/2018/11/07/Ptt%E7%88%AC%E8%9F%B2/
