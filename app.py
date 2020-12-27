@@ -128,11 +128,6 @@ def webhook_handler():
         if response == False:
             if event.message.text == "fsm":
                 send_image_message(event.reply_token, 'https://i.ibb.co/9HxHDnz/fsm.png?')
-            if event.message.text == "幫助":
-                if machine.state == "newest_page":
-                    send_text_message(event.reply_token, "使用者欲觀看文章分類\n請輸入「經驗」、「創作」、「翻譯」")
-                elif machine.state == "user":
-                    send_text_message(event.reply_token, "輸入「新文章」查看近日新文章。\n輸入「熱門文章」查看近日爆文。\n輸入「經典文章」查看Marvel版精選好文。\n隨時輸入「fsm」可以查看狀態圖。")
             elif machine.state == 'user':
                 send_text_message(event.reply_token, "輸入「新文章」查看近日新文章。\n輸入「熱門文章」查看近日爆文。\n輸入「經典文章」查看Marvel版精選好文。\n隨時輸入「fsm」可以查看狀態圖。")
             elif machine.state == 'newest_page':
