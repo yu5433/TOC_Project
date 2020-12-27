@@ -127,12 +127,29 @@ def webhook_handler():
         response = machine.advance(event)
         if response == False:
             if event.message.text == "fsm":
-                send_image_message(event.reply_token, 'https://imgur.com/EsYlDOt')
+                send_image_message(event.reply_token, 'https://imgur.com/EsYlDOt?')
             elif machine.state != 'user' and event.message.text == "回到主畫面":
                 send_text_message(event.reply_token, "輸入「新文章」查看近日新文章。\n輸入「熱門文章」查看近日爆文。\n輸入「經典文章」查看Marvel版精選好文。\n隨時輸入「回到主畫面」可以重頭開始。\n隨時輸入「fsm」可以查看狀態圖。")
                 machine.go_back()
             elif machine.state == 'user':
                 send_text_message(event.reply_token, "輸入「新文章」查看近日新文章。\n輸入「熱門文章」查看近日爆文。\n輸入「經典文章」查看Marvel版精選好文。\n隨時輸入「回到主畫面」可以重頭開始。\n隨時輸入「fsm」可以查看狀態圖。")
+            elif machine.state == 'newest_page':
+                send_text_message(event.reply_token, "newest")
+            elif machine.state == 'hottest_page':
+                send_text_message(event.reply_token, "hottest")
+            elif machine.state == 'classical_page':
+                send_text_message(event.reply_token, "classical")
+            elif machine.state == 'experience_page':
+                send_text_message(event.reply_token, "experience")
+            elif machine.state == 'creation_page':
+                send_text_message(event.reply_token, "creation")
+            elif machine.state == 'translation_page':
+                send_text_message(event.reply_token, "translation")
+            
+            
+            
+            
+                
             #send_text_message(event.reply_token, "Not Entering any State")
     
     return "OK"
