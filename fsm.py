@@ -89,6 +89,7 @@ class TocMachine(GraphMachine):
             next_page_url = 'https://www.ptt.cc' + up_page_href
             url = next_page_url
             content += get_txt(0, url = url)
+        content += "已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content) 
         self.go_back()
     def is_going_to_creation_page(self, event):
@@ -106,6 +107,7 @@ class TocMachine(GraphMachine):
             next_page_url = 'https://www.ptt.cc' + up_page_href
             url = next_page_url
             content += get_txt(1, url = url)
+        content+="\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content) 
         self.go_back()
     def is_going_to_translation_page(self, event):
@@ -123,6 +125,7 @@ class TocMachine(GraphMachine):
             next_page_url = 'https://www.ptt.cc' + up_page_href
             url = next_page_url
             content += get_txt(2, url = url)
+        content+="\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content) 
         self.go_back()
     def is_going_to_hottest_page(self, event):
@@ -132,7 +135,7 @@ class TocMachine(GraphMachine):
         content = "以下為近日熱門文章\n"
         url = "https://www.ptt.cc/bbs/marvel/index.html"
         content+=get_hot_href(url)
-        content+="為您返回主畫面^__^\n"
+        content+="\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content)
         self.go_back()
     def is_going_to_classical_page(self, event):
@@ -146,6 +149,6 @@ class TocMachine(GraphMachine):
         content += "[翻譯] Nosleep-太空女孩\n https://www.ptt.cc/bbs/marvel/M.1579713441.A.EED.html \n"
         content += "[翻譯] Nosleep-我在網上徵到惡魔室友(1)\n https://www.ptt.cc/bbs/marvel/M.1543501533.A.E93.html \n"
         content += "[轉錄] 真人真事-不眠山\n https://www.ptt.cc/bbs/marvel/M.1446446701.A.FF1.html \n"
-        content += "為您返回主畫面^__^\n"
+        content += "\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content)        
         self.go_back()
