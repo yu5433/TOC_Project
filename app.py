@@ -145,6 +145,8 @@ def webhook_handler():
                 send_text_message(event.reply_token, "creation")
             elif machine.state == 'translation_page':
                 send_text_message(event.reply_token, "translation")
+            else:
+                send_text_message(event.reply_token, machine.state)
             
             
             
