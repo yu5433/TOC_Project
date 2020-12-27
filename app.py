@@ -125,9 +125,6 @@ def webhook_handler():
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
-        if machine.state != "user" and event.message.text == "回到主畫面":
-                machine.go_back()
-                send_text_message(event.reply_token, machine.state())
         if response == False:
             if event.message.text == "fsm":
                 send_image_message(event.reply_token, 'https://pttmarvelwow.herokuapp.com/show-fsm')
