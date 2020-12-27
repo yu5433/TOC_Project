@@ -127,7 +127,7 @@ def webhook_handler():
         response = machine.advance(event)
         if response == False:
             if event.message.text == "fsm":
-                send_image_message(event.reply_token, 'https://pttmarvelwow.herokuapp.com/show-fsm')
+                send_image_message(event.reply_token, 'https://imgur.com/EsYlDOt')
             elif machine.state != 'user' and event.message.text == "回到主畫面":
                 send_text_message(event.reply_token, "輸入「新文章」查看近日新文章。\n輸入「熱門文章」查看近日爆文。\n輸入「經典文章」查看Marvel版精選好文。\n隨時輸入「回到主畫面」可以重頭開始。\n隨時輸入「fsm」可以查看狀態圖。")
                 machine.go_back()
