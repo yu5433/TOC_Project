@@ -89,7 +89,7 @@ class TocMachine(GraphMachine):
             next_page_url = 'https://www.ptt.cc' + up_page_href
             url = next_page_url
             content += get_txt(0, url = url)
-        content += "已為您返回主頁^__^\n"
+        content += "\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content) 
         self.go_back()
     def is_going_to_creation_page(self, event):
