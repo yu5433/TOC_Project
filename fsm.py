@@ -59,7 +59,7 @@ def get_txt(num, url):
                 content += title + "https://www.ptt.cc"+ a_item.get('href')
             elif "翻譯" in title and num == 2:
                 content += title + "https://www.ptt.cc"+ a_item.get('href')
-            else:
+            elif num == 7:
                 content += title + "https://www.ptt.cc"+ a_item.get('href')
     return content
 
@@ -98,7 +98,7 @@ class TocMachine(GraphMachine):
     def is_going_to_every_page(self, event):
         text = event.message.text
         return text == "不分類"
-    def on_enter_creation_page(self, event):
+    def on_enter_every_page(self, event):
         url = "https://www.ptt.cc/bbs/marvel/index.html"
         content = "以下為搜尋到的內容："
         content += get_txt(1, url)
