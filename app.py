@@ -135,7 +135,7 @@ def webhook_handler():
             if event.message.text == "fsm1":
                 send_image_message(event.reply_token, 'https://i.ibb.co/9HxHDnz/fsm.png?')
             elif event.message.text == "fsm2":
-                send_image_message(event.reply_token, 'https://i.ibb.co/9HxHDnz/fsm.png?')
+                send_image_message(event.reply_token, 'https://i.ibb.co/G5ZbQSm/fsm.png?')
             elif machine.state == 'user':
                 send_text_message(event.reply_token, "輸入「新文章」查看近日新文章。\n輸入「熱門文章」查看近日爆文。\n輸入「經典文章」查看Marvel版精選好文。\n隨時輸入「fsm」可以查看狀態圖。")
             elif machine.state == 'newest_page':

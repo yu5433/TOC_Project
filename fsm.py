@@ -99,18 +99,8 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text == "不分類"
     def on_enter_every_page(self, event):
-        url = "https://www.ptt.cc/bbs/marvel/index.html"
-        content = "以下為搜尋到的內容："
-        content += get_txt(1, url)
-        for page in range(7,3):
-            r = requests.get(url)
-            soup = BeautifulSoup(r.text,"html.parser")
-            btn = soup.select('div.btn-group > a')
-            up_page_href = btn[3]['href']
-            next_page_url = 'https://www.ptt.cc' + up_page_href
-            url = next_page_url
-            content += get_txt(7, url = url)
-        content+="\n已為您返回主頁^__^\n"
+    
+        content+="\n騙你的\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content) 
         self.go_back()
 
