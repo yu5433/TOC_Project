@@ -43,6 +43,12 @@ machine = TocMachine(
         {
             "trigger": "advance",
             "source": "newest_page",
+            "dest": "every_page",
+            "conditions": "is_going_to_every_page",
+        },
+        {
+            "trigger": "advance",
+            "source": "newest_page",
             "dest": "creation_page",
             "conditions": "is_going_to_creation_page",
         },
@@ -52,7 +58,7 @@ machine = TocMachine(
             "dest": "translation_page",
             "conditions": "is_going_to_translation_page",
         },
-        {"trigger": "go_back", "source": ["newest_page", "hottest_page", "classical_page", "experience_page", "creation_page", "translation_page"], "dest": "user"},
+        {"trigger": "go_back", "source": ["newest_page", "hottest_page", "every_page","classical_page", "experience_page", "creation_page", "translation_page"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -126,12 +132,14 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            if event.message.text == "fsm":
+            if event.message.text == "fsm1":
+                send_image_message(event.reply_token, 'https://i.ibb.co/9HxHDnz/fsm.png?')
+            elif event.message.text == "fsm2":
                 send_image_message(event.reply_token, 'https://i.ibb.co/9HxHDnz/fsm.png?')
             elif machine.state == 'user':
                 send_text_message(event.reply_token, "輸入「新文章」查看近日新文章。\n輸入「熱門文章」查看近日爆文。\n輸入「經典文章」查看Marvel版精選好文。\n隨時輸入「fsm」可以查看狀態圖。")
             elif machine.state == 'newest_page':
-                send_text_message(event.reply_token, "使用者欲觀看文章分類\n請輸入「經驗」、「創作」、「翻譯」")
+                send_text_message(event.reply_token, "使用者欲觀看文章分類\n請輸入「經驗」、「創作」、「翻譯」、「不分類」")
             
             #send_text_message(event.reply_token, "Not Entering any State")
     

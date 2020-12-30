@@ -59,6 +59,8 @@ def get_txt(num, url):
                 content += title + "https://www.ptt.cc"+ a_item.get('href')
             elif "翻譯" in title and num == 2:
                 content += title + "https://www.ptt.cc"+ a_item.get('href')
+            else:
+                content += title + "https://www.ptt.cc"+ a_item.get('href')
     return content
 
 
@@ -71,7 +73,7 @@ class TocMachine(GraphMachine):
         return text == "新文章"
 
     def on_enter_newest_page(self, event):
-        text = "使用者欲觀看文章分類\n請輸入「經驗」、「創作」、「翻譯」"
+        text = "使用者欲觀看文章分類\n請輸入「經驗」、「創作」、「翻譯」、「不分類」"
         send_text_message(event.reply_token, text) 
 
     def is_going_to_experience_page(self, event):
@@ -92,6 +94,26 @@ class TocMachine(GraphMachine):
         content += "\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content) 
         self.go_back()
+
+    def is_going_to_every_page(self, event):
+        text = event.message.text
+        return text == "不分類"
+    def on_enter_creation_page(self, event):
+        url = "https://www.ptt.cc/bbs/marvel/index.html"
+        content = "以下為搜尋到的內容："
+        content += get_txt(1, url)
+        for page in range(7,3):
+            r = requests.get(url)
+            soup = BeautifulSoup(r.text,"html.parser")
+            btn = soup.select('div.btn-group > a')
+            up_page_href = btn[3]['href']
+            next_page_url = 'https://www.ptt.cc' + up_page_href
+            url = next_page_url
+            content += get_txt(7, url = url)
+        content+="\n已為您返回主頁^__^\n"
+        send_text_message(event.reply_token, content) 
+        self.go_back()
+
     def is_going_to_creation_page(self, event):
         text = event.message.text
         return text == "創作"
@@ -110,6 +132,7 @@ class TocMachine(GraphMachine):
         content+="\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content) 
         self.go_back()
+
     def is_going_to_translation_page(self, event):
         text = event.message.text
         return text == "翻譯"
