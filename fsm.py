@@ -99,7 +99,6 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text == "不分類"
     def on_enter_every_page(self, event):
-    
         content+="\n騙你的\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content) 
         self.go_back()
