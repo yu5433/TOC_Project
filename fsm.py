@@ -73,7 +73,7 @@ class TocMachine(GraphMachine):
         return text == "新文章"
 
     def on_enter_newest_page(self, event):
-        text = "使用者欲觀看文章分類\n請輸入「經驗」、「創作」、「翻譯」、「不分類」"
+        text = "使用者欲觀看文章分類\n請輸入「經驗」、「創作」、「翻譯」、「test」"
         send_text_message(event.reply_token, text) 
 
     def is_going_to_experience_page(self, event):
@@ -97,7 +97,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_every_page(self, event):
         text = event.message.text
-        return text == "不分類"
+        return text.lower() == "test"
     def on_enter_every_page(self, event):
         content="\n騙你的\n已為您返回主頁^__^\n"
         send_text_message(event.reply_token, content) 
